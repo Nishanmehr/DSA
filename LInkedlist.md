@@ -131,6 +131,12 @@ public class Solution {
 }
 ```
 
+## Kadane's Algorithm
+when we use it 
+Subarray / contigous
+sum /product
+max/min
+
 
 
 
