@@ -224,7 +224,7 @@ class Solution {
     }
 }
 ```
-##### 5.https://leetcode.com/problems/maximum-product-subarray/
+##### 3.https://leetcode.com/problems/maximum-product-subarray/
 ``` java
 class Solution {
     public int maxProduct(int[] nums) {
@@ -247,7 +247,66 @@ class Solution {
         return ans;
     }
 }
+
 ```
+
+##### 4.https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/
+
+``` java
+class Solution {
+    public int maxAbsoluteSum(int[] nums) {
+        int i = 0;
+        int n = nums.length;
+        int maxSum = nums[0];
+        int minSum = nums[0];
+        int res = nums[0];
+
+        for (i = 1; i<n; i++){
+            int v1 = (maxSum + nums[i]);
+            int v2 = (minSum + nums[i]);
+            int v3 = nums[i];
+
+            maxSum = Math.max(v3, Math.max(v1, v2));
+            minSum = Math.min(v3, Math.min(v1,v2));
+
+            res = Math.max(res , Math.max(Math.abs(maxSum), Math.abs(minSum)));
+
+
+        }
+        return Math.abs(res);
+
+    }
+}
+```
+##### 5. https://leetcode.com/problems/maximum-sum-circular-subarray/
+``` java
+class Solution {
+    public int maxSubarraySumCircular(int[] nums) {
+        int minSum = nums[0];
+        int maxSum = nums[0];
+        int res = nums[0];
+        int totalSum = nums[0];
+        int currMax = nums[0];
+        int currMin = nums[0];
+
+        for (int i = 1; i<nums.length; i++){
+            totalSum+=nums[i];
+
+            currMax = Math.max(nums[i], currMax+nums[i]);
+            maxSum = Math.max(currMax,maxSum);
+            currMin = Math.min(nums[i],currMin+nums[i]);
+            minSum = Math.min(currMin,minSum);
+
+        }
+          if (maxSum<0)
+          return maxSum;
+
+          return Math.max(maxSum,totalSum -minSum);
+        
+    }
+}
+```
+
 
 
 
