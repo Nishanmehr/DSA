@@ -1,5 +1,48 @@
-## LINKED LIST
+# LINKED LIST
 ## SLOW FAST POINTER
+
+## When to Think About It
+
+Array/Linked list/String/numbers
+Ask these questions:
+
+1. Is there a possibility of a cycle?
+2. Do I need to find the middle element?
+3. Can the data be viewed as nodes connected one after another?
+4. Am I repeatedly moving from one position to another?
+5. Can I avoid using a HashSet and achieve O(1) space?
+
+## Pattern
+
+slow -> 1 step
+fast -> 2 steps
+
+while(fast != null && fast.next != null){
+    slow = slow.next;
+    fast = fast.next.next;
+}
+
+## Common Problems
+
+### Cycle Detection
+- Linked List Cycle (LC 141)
+- Circular Array Loop
+- Happy Number
+
+### Find Cycle Start
+- Linked List Cycle II (LC 142)
+
+### Find Middle Node
+- Middle of Linked List (LC 876)
+
+### Find Duplicate Number
+- Find the Duplicate Number (LC 287)
+
+## Complexity
+
+Time: O(n)
+Space: O(1)
+
 
 #### https://leetcode.com/problems/happy-number/
 ``` Java
