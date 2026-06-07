@@ -1,4 +1,5 @@
 ## LINKED LIST
+## SLOW FAST POINTER
 
 #### https://leetcode.com/problems/happy-number/
 ``` Java
@@ -63,50 +64,41 @@ class Solution {
 ### https://leetcode.com/problems/middle-of-the-linked-list/
 ``` java
 class Solution {
-    public int findDuplicate(int[] nums) {
-        int slow = 0;
-        int fast = 0;
-        
-        while ( true ){
-            slow = nums[slow];
-            fast = nums[fast];
-            fast = nums[fast];
+    public ListNode middleNode(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
 
-            if (slow == fast){
-                slow = 0;
-
-                while ( slow != fast ){
-                    slow = nums[slow];
-                    fast = nums[fast];
-                }
-                return slow;
-            }
+        while (fast!=null && fast.next !=null){
+            slow=slow.next;
+            fast = fast.next.next;
         }
+        return slow;
     }
-}
+}   
+
 ```
 ### https://leetcode.com/problems/linked-list-cycle-ii/
 ``` java
-class Solution {
-    public int findDuplicate(int[] nums) {
-        int slow = 0;
-        int fast = 0;
-        
-        while ( true ){
-            slow = nums[slow];
-            fast = nums[fast];
-            fast = nums[fast];
+public class Solution {
+    public ListNode detectCycle(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
 
-            if (slow == fast){
-                slow = 0;
+        while (fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
 
-                while ( slow != fast ){
-                    slow = nums[slow];
-                    fast = nums[fast];
+            if (slow==fast){
+                slow = head;
+
+                while (slow!=fast){
+                    slow = slow.next;
+                    fast = fast.next;
                 }
                 return slow;
             }
         }
+       return null;
     }
 }
 ```
@@ -282,27 +274,27 @@ class Solution {
 ``` java
 class Solution {
     public int maxSubarraySumCircular(int[] nums) {
+        int totalsum = 0;
         int minSum = nums[0];
         int maxSum = nums[0];
-        int res = nums[0];
-        int totalSum = nums[0];
-        int currMax = nums[0];
-        int currMin = nums[0];
-
-        for (int i = 1; i<nums.length; i++){
-            totalSum+=nums[i];
-
-            currMax = Math.max(nums[i], currMax+nums[i]);
-            maxSum = Math.max(currMax,maxSum);
-            currMin = Math.min(nums[i],currMin+nums[i]);
-            minSum = Math.min(currMin,minSum);
-
-        }
-          if (maxSum<0)
-          return maxSum;
-
-          return Math.max(maxSum,totalSum -minSum);
+        int cminSum = nums[0];
+        int cmaxSum = nums[0];
         
+        for (int i =0; i<nums.length; i++){
+            totalsum+=nums[i];
+        }
+        for (int i =1; i<nums.length; i++){
+
+            maxSum = Math.max(nums[i], maxSum+nums[i]);
+            minSum = Math.min(nums[i], minSum+nums[i]);
+
+            cminSum = Math.min(cminSum,minSum);
+            cmaxSum = Math.max(cmaxSum,maxSum);
+        }
+        if(cmaxSum<0){
+                return cmaxSum;
+            }
+        return Math.max(cmaxSum,totalsum-cminSum);
     }
 }
 ```
