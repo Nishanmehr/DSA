@@ -233,7 +233,7 @@ Stack = **Last In First Out + problem solving tool for reverse, backtrack, and n
 # QUESTION AND PROBLEMS 
 
 ### 1.https://leetcode.com/problems/reverse-string/
-```
+``` java
 class Solution {
     public void reverseString(char[] s) {
         Stack<Character> st = new Stack<>();
@@ -250,7 +250,7 @@ class Solution {
 }
 ```
 ### 2.https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/
-```
+``` java
 class Solution {
     public String removeDuplicates(String s) {
         Stack<Character> st = new Stack<>();
@@ -277,7 +277,66 @@ class Solution {
 }
 ```
 
+### 3.https://leetcode.com/problems/valid-parentheses/
+``` java
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> st = new Stack<>();
+        int i=0;
+        int n = s.length();
 
+        for ( i=0; i<n; i++){
+             char ch = s.charAt(i);
+            if (ch == '(' || ch == '[' || ch == '{' ){
+                st.push(ch);
+            }else {
+                if(st.isEmpty()){
+                return false;
+            }
+             if(
+             (ch == ')' && st.peek() == '(') || 
+             (ch== '}' && st.peek()== '{') ||
+             (ch== ']' && st.peek()== '[') ){
+                st.pop();
+            } else{
+                return false;
+            }
+        }
+     }
+        if(!st.isEmpty()){
+            return false;
+        }
+        return true;
+    }
+}
+```
+### 4. https://leetcode.com/problems/next-greater-element-ii/
+``` java
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        int n = nums.length;
+        int[] ans = new int[n];
+        Stack<Integer> st = new Stack<>();
+        
+        for(int i= 2*n-1; i >= 0; i--){
+            int idx = i %n;
+             
+             while(!st.isEmpty() && st.peek()<=nums[idx]){
+                st.pop();
+             }
+             if(i<n){
+                if(st.isEmpty()){
+                    ans[idx]= -1;
+                }else {
+                    ans[idx] = st.peek();
+                }
+             }
+             st.push(nums[idx]);
+        }
+        return ans;
+    }
+}
+```
 
 
 
